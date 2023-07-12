@@ -17,8 +17,8 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/static/
-      - media:/app/media/
+      - static:/static
+      - media:/media
   frontend:
     env_file: .env
     image: ingarbi/kittygram_frontend
@@ -31,5 +31,5 @@ services:
     ports:
       - 9000:80
     volumes:
-      - static:/static/
-      - media:/media/
+      - static:/static
+      - media:/media
