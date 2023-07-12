@@ -4,11 +4,11 @@ from .models import Achievement, AchievementCat, Cat
 
 
 class CatAdmin(admin.ModelAdmin):
-    list_display = ('name', 'color', 'birth_year', 'owner', 'achievements')
+    list_display = ('name', 'color', 'birth_year', 'owner')
 
 
 class AchievementAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ('name',)
 
 
 class AchievementCatAdmin(admin.ModelAdmin):
