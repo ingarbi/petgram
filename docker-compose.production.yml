@@ -26,10 +26,10 @@ services:
     volumes:
       - static:/static
   gateway:
-    image: ingarbi/kittygram_gateway
+    image: ingarbi/kittygram_gatleway
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/static
-      - media:/media
+      - static:/static/
+      - media:/media/
