@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/static
+      - static:/static/
       - media:/app/media/
   frontend:
     env_file: .env
@@ -26,10 +26,10 @@ services:
     volumes:
       - static:/static
   gateway:
-    image: ingarbi/kittygram_gatleway
+    image: ingarbi/kittygram_gateway
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/app/static/
-      - media:/app/static/media/
+      - static:/app/static
+      - media:/app/media/
