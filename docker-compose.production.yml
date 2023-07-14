@@ -30,8 +30,6 @@ services:
     env_file: .env
     ports:
       - 9000:80
-    depends_on:
-      - db
     volumes:
       - static:/static
       - ./media:/media
