@@ -18,7 +18,7 @@ services:
       - db
     volumes:
       - static:/static
-      - media:/media/cats/images/
+      - media:/media
   frontend:
     env_file: .env
     image: ingarbi/kittygram_frontend
@@ -34,4 +34,4 @@ services:
       - backend
     volumes:
       - static:/static
-      - media:/media/cats/images/
+      - media:/media
