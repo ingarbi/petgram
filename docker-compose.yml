@@ -1,0 +1,35 @@
+version: '3'
+
+volumes:
+  pg_data:
+  static:
+  media:
+
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    build: ingarbi/kittygram_backend
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - static:/static
+      - media:/media
+  frontend:
+    env_file: .env
+    build: ingarbi/kittygram_frontend
+    command: cp -r /app/build/. /static/
+    volumes:
+      - static:/static
+  gateway:
+    build: ingarbi/kittygram_gateway
+    env_file: .env
+    ports:
+      - 9000:80
+    volumes:
+      - static:/static
+      - media:/media
