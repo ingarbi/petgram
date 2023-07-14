@@ -1,4 +1,4 @@
-export const URL = "https://mykittyapp.sytes.net/";
+export const URL = "";
 
 export const colorsList = [
   "#FFE4C4",
