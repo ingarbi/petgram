@@ -11,14 +11,47 @@
  - djangorestframework==3.12.4
  - Nginx
  - gunicorn
- 
-## Установка проекта на локальный компьютер из репозитория 
- - Клонировать репозиторий `git clone <адрес вашего репозитория>`
- - перейти в директорию с клонированным репозиторием
- - установить виртуальное окружение `python3 -m venv venv`
- - установить зависимости `pip install -r requirements.txt`
- - запустить проект командой python manage.py runserver в бэкэнде
- - установить зависимости во фронтэнде командой npm i, и запустить командой npm run start
+
+## Запуск проекта из исходников GitHub
+
+Клонируем себе репозиторий: 
+
+```bash 
+git clone https://github.com/ingarbi/kittygram_final.git
+```
+
+Выполняем запуск:
+
+```bash
+sudo docker compose -f docker-compose.yml up
+```
+
+## После запуска: Миграции, сбор статистики
+
+После запуска необходимо выполнить сбор статистики и миграции бэкенда. Статистика фронтенда собирается во время запуска контейнера, после чего он останавливается. 
+
+```bash
+sudo docker compose -f [имя-файла-docker-compose.yml] exec backend python manage.py migrate
+
+sudo docker compose -f [имя-файла-docker-compose.yml] exec backend python manage.py collectstatic
+
+sudo docker compose -f [имя-файла-docker-compose.yml] exec backend cp -r /app/collected_static/. /static/static/
+```
+
+И далее проект доступен на: 
+
+```
+http://localhost:9000/
+```
+
+## Остановка оркестра контейнеров
+
+В окне, где был запуск **Ctrl+С** или в другом окне:
+
+```bash
+sudo docker compose -f docker-compose.yml down
+```
+
 
 ## Примеры взаимодействия с приложением через API используя следующие пути:
 1. /api/cats/ - принимает GET и POST, для добавления новых и получения существующих объектов
