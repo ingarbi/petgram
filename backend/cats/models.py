@@ -27,6 +27,9 @@ class Cat(models.Model):
         default=None
     )
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.name
 
