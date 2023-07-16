@@ -1,0 +1,59 @@
+server {
+    server_name 158.160.18.87 rbdev.sytes.net;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mykittyapp.sytes.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mykittyapp.sytes.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    server_name 158.160.18.87 mykittyapp.sytes.net;
+    server_tokens   off;
+
+
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:9000;
+    }
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mykittyapp.sytes.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mykittyapp.sytes.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}server {
+    if ($host = mykittyapp.sytes.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 158.160.18.87 mykittyapp.sytes.net;
+    return 404; # managed by Certbot
+
+
+}server {
+    if ($host = rbdev.sytes.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 158.160.18.87 rbdev.sytes.net;
+    return 404; # managed by Certbot
+
+
+}
